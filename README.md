@@ -1,5 +1,5 @@
 # advent-of-code-2022
-Because it is fun, from December 1 to 25 I complete coding challenges created by adventofcode.com, which I share with the world through this repo. :) 
+Because it is fun (:D), from December 1 to 25 I complete coding challenges created by adventofcode.com, which I share with the world through this repo.
 
 Each day, adventofcode.com provides two challenges and a data file (usually called input.txt). 
 I attempt to solve the challenges leveraging Python code. 
