@@ -1,9 +1,11 @@
 # advent-of-code-2022
-In this repo, I provide my solutions to the daily challenges (Dec 1-25) provided by adventofcode.com.
+Because it is fun, from December 1 to 25 I complete coding challenges created by adventofcode.com, which I share with the world through this repo. :) 
 
 Each day, adventofcode.com provides two challenges and a data file (usually called input.txt). 
 I attempt to solve the challenges leveraging Python code. 
 Typically, a solution is a single numeric value, calculated by applying my code to the input data.
+Each folder in my repo contains two solutions and the input data for a given day.
 
-For each solution, if it is correct I am awarded a star, which adds to my points.
-Points are compared in a leaderboard in adventofcode.com and the number of points awareded per correct solution depend on the speed of submission.
+For each correct solution I am awarded a star and some points. Points are calculated based on the speed of my submission, and compared using a leaderboard.
+
+I do this for fun. 
