@@ -8,4 +8,4 @@ Each folder in my repo contains two solutions and the input data for a given day
 
 For each correct solution I am awarded a star and some points. Points are calculated based on the speed of my submission, and compared using a leaderboard.
 
-I do this for fun. 
+Happy coding :)
