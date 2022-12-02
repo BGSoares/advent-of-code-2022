@@ -71,8 +71,7 @@
 # Your puzzle answer was 204639.
 
 def reformat(data):
-    data = data.split("\n\n")
-    data = data[:-1]
+    data = data.split("\n\n")[:-1]
     data = [map(int, d.split("\n")) for d in data]
     data = [sum(elf) for elf in data]
     return data

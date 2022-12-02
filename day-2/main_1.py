@@ -57,55 +57,30 @@
 
 # Your puzzle answer was 13009.
 
-with open("day-2/input.txt", mode = "r", encoding = "UTF-8") as f:
-    games = [round[:-1] for round in f]
+def reformat(data):
+    data = data.split("\n")[:-1]
+    data = [line.split(" ") for line in data]
+    return data
 
-ROUND_SCORE = 0
-TOTAL_SCORE = 0
+def solve_p1(data):
+    CONVERT = {"X":"A", "Y":"B", "Z":"C"}
+    RULES = {"A": [1,"C","B"], "B": [2,"A","C"], "C": [3,"B","A"]}
+    result = []
+    for game in data:
+        print(game)
+        elf = game[0]
+        you = CONVERT[game[1]]
+        base_points = RULES[you][0]
+        if elf == you:
+            result.append(3 + base_points)
+        elif elf == RULES[you][1]:
+            result.append(6 + base_points)
+        else:
+            result.append(base_points)
+    return sum(result)
 
-for game_round in games:
-
-    # Rock vs rock, tie
-    if game_round == 'A X':
-        ROUND_SCORE = 1 + 3
-
-    # Rock vs paper, win
-    elif game_round == 'A Y':
-        ROUND_SCORE = 2 + 6
-
-    # Rock vs scissor, lose
-    elif game_round == 'A Z':
-        ROUND_SCORE = 3 + 0
-
-    # Paper vs rock, lose
-    elif game_round == 'B X':
-        ROUND_SCORE = 1 + 0
-
-    # Paper vs paper, tie
-    elif game_round == 'B Y':
-        ROUND_SCORE = 2 + 3
-
-    # Paper vs scissor, win
-    elif game_round == 'B Z':
-        ROUND_SCORE = 3 + 6
-
-    # Scissor vs rock, win
-    elif game_round == 'C X':
-        ROUND_SCORE = 1 + 6
-
-    # Scissor vs paper, lose
-    elif game_round == 'C Y':
-        ROUND_SCORE = 2 + 0
-
-    # Scissor vs scissor, tie
-    elif game_round == 'C Z':
-        ROUND_SCORE = 3 + 3
-
-    else:
-        print(game_round)
-        raise ValueError
-
-
-    TOTAL_SCORE = TOTAL_SCORE + ROUND_SCORE
-
-print(TOTAL_SCORE)
+if __name__ == "__main__":
+    with open("day-2/input.txt", mode = "r", encoding = "UTF-8") as input:
+        data = input.read()
+    data = reformat(data)
+    print(f"Solution to problem 1 is: {solve_p1(data)}")
