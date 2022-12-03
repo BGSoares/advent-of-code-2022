@@ -50,6 +50,8 @@
 
 # Your puzzle answer was 71124.
 
+
+
 # --- Part Two ---
 # By the time you calculate the answer to the Elves' question, 
 # they've already realized that the Elf carrying the most Calories 
@@ -70,6 +72,7 @@
 
 # Your puzzle answer was 204639.
 
+
 def reformat(data):
     data = data.split("\n\n")[:-1]
     data = [map(int, d.split("\n")) for d in data]
@@ -81,6 +84,8 @@ def solve_p1(data):
 
 def solve_p2(data):
     return sum(sorted(data)[-3:])
+
+
 
 if __name__ == "__main__":
     with open("day-1/input.txt") as input:
