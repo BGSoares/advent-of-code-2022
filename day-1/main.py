@@ -29,5 +29,5 @@ if __name__ == "__main__":
     with open("day-1/input.txt") as input:
         data = input.read()
     data = reformat(data)
-    print(f"Solution to problem 1 is: {solve_c1(data)}")
-    print(f"Solution to problem 2 is: {solve_c2(data)}")
+    print(f"Solution to challenge 1 is: {solve_c1(data)}")
+    print(f"Solution to challenge 2 is: {solve_c2(data)}")
