@@ -27,6 +27,8 @@ def reformat(data):
                 data[p][e] = set(list(range(start, end)))
     return data
 
+
+
 def solve_c1(data):
     """
     Solve challenge 1.
@@ -40,6 +42,8 @@ def solve_c1(data):
             res += 1
     return res
 
+
+
 def solve_c2(data):
     """
     Solve challenge 2.
@@ -51,6 +55,8 @@ def solve_c2(data):
         if len(elf_1.intersection(elf_2)):
             res += 1
     return res
+
+
 
 
 
