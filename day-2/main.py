@@ -3,6 +3,8 @@ This module solves the two challenges from Advent of Code 2022, day 2.
 For challenge explanations, see https://adventofcode.com/2022/day/2
 """
 
+
+
 RULES = {"A": [1,"C","B"], "B": [2,"A","C"], "C": [3,"B","A"]}
 
 
@@ -13,7 +15,7 @@ def reformat(data):
 
 
 
-def solve_p1(data):
+def solve_c1(data):
     CONVERT = {"X":"A", "Y":"B", "Z":"C"}
 
     result = []
@@ -31,7 +33,7 @@ def solve_p1(data):
 
 
 
-def solve_p2(data):
+def solve_c2(data):
 
     result = []
     for game in data:
@@ -56,5 +58,5 @@ if __name__ == "__main__":
     with open("day-2/input.txt", mode = "r", encoding = "UTF-8") as input:
         data = input.read()
     data = reformat(data)
-    print(f"Solution to problem 1 is: {solve_p1(data)}")
-    print(f"Solution to problem 2 is: {solve_p2(data)}")
+    print(f"Solution to problem 1 is: {solve_c1(data)}")
+    print(f"Solution to problem 2 is: {solve_c2(data)}")

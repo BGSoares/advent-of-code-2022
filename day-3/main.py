@@ -18,7 +18,7 @@ def get_priority(item):
 
 
 
-def solve_p1(data):
+def solve_c1(data):
     score = 0
     for rucksack in data:
         item_count = len(rucksack)
@@ -34,7 +34,7 @@ def solve_p1(data):
 
 
 
-def solve_p2(data):
+def solve_c2(data):
     score = 0
     for _ in range(len(data)//3):
         elf1 = set(data.pop())
@@ -56,5 +56,5 @@ if __name__ == "__main__":
     with open("day-3/input.txt") as input:
         data = input.read()[:-1]
     data = reformat(data)
-    print(f"Solution to problem 1: {solve_p1(data)}")
-    print(f"Solution to problem 2 is: {solve_p2(data)}")
+    print(f"Solution to problem 1 is: {solve_c1(data)}")
+    print(f"Solution to problem 2 is: {solve_c2(data)}")
