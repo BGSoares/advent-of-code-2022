@@ -1,11 +1,18 @@
+"""
+This module solves the two challenges from Advent of Code 2022, day 5.
+For challenge explanations, see https://adventofcode.com/2022/day/5
+
+"""
 
 import re
 
 def reformat(data):
+    """
+    Split stacks data and instructions.  Transform stacks to dictionary.
+    """
     STACKS = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
     INSTRUCTIONS = []
-    data = data.split("\n")
-    for line in data:
+    for line in data.split("\n"):
         crates = re.findall(r"\[\D\]", line)
         if crates:
             stacks = [m.start(0)//4 + 1 for m in re.finditer(r"\[\D\]", line)]
@@ -16,25 +23,46 @@ def reformat(data):
     return STACKS, INSTRUCTIONS
 
 
-def solve_c1(STACKS, INSTRUCTIONS):
+def solve_c1(stacks, instructions):
+    """
+    Solve challenge 1.
+    See https://adventofcode.com/2022/day/4
+    """
+    stacks1 = stacks.copy()
     res = ""
-    for instruction in INSTRUCTIONS:
-        # print("instruction: ", instruction)
+
+    for instruction in instructions:
         num_crates = int(instruction[0])
         from_stack = int(instruction[1])
         to_stack = int(instruction[2])
-        # print("from_stack: ", STACKS[from_stack])
-        # print("to_stack: ", STACKS[to_stack])
+        for crate in range(num_crates):
+            stacks1[to_stack].insert(0, stacks1[from_stack].pop(0))
 
-        move = STACKS[from_stack][:num_crates]
-        # print("move: ", move)
-        STACKS[to_stack] = move + STACKS[to_stack]
-        # print("to_stack after", STACKS[to_stack])
-        STACKS[from_stack] = STACKS[from_stack][num_crates:]
-        # print("from_stack after", STACKS[from_stack])
+    for crate in stacks1.values():
+        res = res + crate[0][1]
+    return res
 
-    
-    for crate in STACKS.values():
+
+def solve_c2(stacks, instructions):
+    """
+    Solve challenge 2.
+    See https://adventofcode.com/2022/day/4
+    """
+    stacks1 = stacks.copy()
+    assert type(stacks1) == dict
+    res = ""
+
+    for instruction in instructions:
+        num_crates = int(instruction[0])
+        from_stack = int(instruction[1])
+        to_stack = int(instruction[2])
+
+        move = stacks1[from_stack][:num_crates]
+        stacks1[from_stack] = stacks1[from_stack][num_crates:]
+        stacks1[to_stack] = move + stacks1[to_stack]
+
+
+    for crate in stacks1.values():
         res = res + crate[0][1]
     return res
 
@@ -43,5 +71,6 @@ if __name__ == "__main__":
     with open("day-5/input.txt") as input:
         data = input.read()
     STACKS, INSTRUCTIONS = reformat(data)
-    # print(INSTRUCTIONS)
     print(f"Solution to challenge 1 is: {solve_c1(STACKS, INSTRUCTIONS)}")
+    STACKS, INSTRUCTIONS = reformat(data)
+    print(f"Solution to challenge 2 is: {solve_c2(STACKS, INSTRUCTIONS)}")
