@@ -26,7 +26,7 @@ def reformat(data):
 def solve_c1(stacks, instructions):
     """
     Solve challenge 1.
-    See https://adventofcode.com/2022/day/4
+    See https://adventofcode.com/2022/day/5
     """
     stacks1 = stacks.copy()
     res = ""
@@ -46,7 +46,7 @@ def solve_c1(stacks, instructions):
 def solve_c2(stacks, instructions):
     """
     Solve challenge 2.
-    See https://adventofcode.com/2022/day/4
+    See https://adventofcode.com/2022/day/5
     """
     stacks1 = stacks.copy()
     assert type(stacks1) == dict
@@ -68,8 +68,8 @@ def solve_c2(stacks, instructions):
 
 
 if __name__ == "__main__":
-    with open("day-5/input.txt") as input:
-        data = input.read()
+    with open("day-5/input.txt", encoding="utf-8") as input_file:
+        data = input_file.read()
     STACKS, INSTRUCTIONS = reformat(data)
     print(f"Solution to challenge 1 is: {solve_c1(STACKS, INSTRUCTIONS)}")
     STACKS, INSTRUCTIONS = reformat(data)

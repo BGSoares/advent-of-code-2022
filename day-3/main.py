@@ -53,8 +53,8 @@ def solve_c2(data):
 
 
 if __name__ == "__main__":
-    with open("day-3/input.txt") as input:
-        data = input.read()[:-1]
+    with open("day-3/input.txt", encoding="utf-8") as input_file:
+        data = input_file.read()[:-1]
     data = reformat(data)
     print(f"Solution to challenge 1 is: {solve_c1(data)}")
     print(f"Solution to challenge 2 is: {solve_c2(data)}")
