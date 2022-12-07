@@ -5,22 +5,25 @@ For challenge explanations, see https://adventofcode.com/2022/day/5
 """
 
 import re
+import copy
+
 
 def reformat(data):
     """
     Split stacks data and instructions.  Transform stacks to dictionary.
     """
-    stacks = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
-    instructions = []
+    stacks0 = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
+    instructions0 = []
     for line in data.split("\n"):
         crates = re.findall(r"\[\D\]", line)
         if crates:
             stack_names = [m.start(0)//4 + 1 for m in re.finditer(r"\[\D\]", line)]
             for i, stack_name in enumerate(stack_names):
-                stacks[stack_name].append(crates[i])
+                stacks0[stack_name].append(crates[i])
         elif (line != "") & (bool(re.search("move", line))):
-            instructions.append(line.split()[1::2])
-    return stacks, instructions
+            instructions0.append(line.split()[1::2])
+    return stacks0, instructions0
+
 
 
 def solve_c1(stacks1, instructions1):
@@ -30,7 +33,7 @@ def solve_c1(stacks1, instructions1):
     """
     res = ""
 
-    for instruction in instructions:
+    for instruction in instructions1:
         num_crates = int(instruction[0])
         from_stack = int(instruction[1])
         to_stack = int(instruction[2])
@@ -44,6 +47,7 @@ def solve_c1(stacks1, instructions1):
     return res
 
 
+
 def solve_c2(stacks2, instructions2):
     """
     Solve challenge 2.
@@ -52,7 +56,7 @@ def solve_c2(stacks2, instructions2):
     assert type(stacks2) == dict
     res = ""
 
-    for instruction in instructions:
+    for instruction in instructions2:
         num_crates = int(instruction[0])
         from_stack = int(instruction[1])
         to_stack = int(instruction[2])
@@ -69,9 +73,12 @@ def solve_c2(stacks2, instructions2):
     return res
 
 
+
+
+
 if __name__ == "__main__":
     with open("day-5/input.txt", encoding="utf-8") as input_file:
         data = input_file.read()
     stacks, instructions = reformat(data)
-    print(f"Solution to challenge 1 is: {solve_c1(stacks.copy(), instructions.copy())}") # ZSQVCCJLL
-    print(f"Solution to challenge 2 is: {solve_c2(stacks.copy(), instructions.copy())}") # QZFJRWHGS
+    print(f"Solution to challenge 1 is: {solve_c1(copy.deepcopy(stacks), instructions.copy())}") # ZSQVCCJLL
+    print(f"Solution to challenge 2 is: {solve_c2(copy.deepcopy(stacks), instructions.copy())}") # QZFJRWHGS
