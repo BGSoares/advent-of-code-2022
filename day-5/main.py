@@ -10,25 +10,24 @@ def reformat(data):
     """
     Split stacks data and instructions.  Transform stacks to dictionary.
     """
-    STACKS = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
-    INSTRUCTIONS = []
+    stacks = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[]}
+    instructions = []
     for line in data.split("\n"):
         crates = re.findall(r"\[\D\]", line)
         if crates:
-            stacks = [m.start(0)//4 + 1 for m in re.finditer(r"\[\D\]", line)]
-            for i, stack in enumerate(stacks):
-                STACKS[stack].append(crates[i])
+            stack_names = [m.start(0)//4 + 1 for m in re.finditer(r"\[\D\]", line)]
+            for i, stack_name in enumerate(stack_names):
+                stacks[stack_name].append(crates[i])
         elif (line != "") & (bool(re.search("move", line))):
-            INSTRUCTIONS.append(line.split()[1::2])
-    return STACKS, INSTRUCTIONS
+            instructions.append(line.split()[1::2])
+    return stacks, instructions
 
 
-def solve_c1(stacks, instructions):
+def solve_c1(stacks1, instructions1):
     """
     Solve challenge 1.
     See https://adventofcode.com/2022/day/5
     """
-    stacks1 = stacks.copy()
     res = ""
 
     for instruction in instructions:
@@ -40,15 +39,16 @@ def solve_c1(stacks, instructions):
 
     for crate in stacks1.values():
         res = res + crate[0][1]
+
+    assert res == "ZSQVCCJLL"
     return res
 
 
-def solve_c2(stacks, instructions):
+def solve_c2(stacks2, instructions2):
     """
     Solve challenge 2.
     See https://adventofcode.com/2022/day/5
     """
-    stacks2 = stacks.copy()
     assert type(stacks2) == dict
     res = ""
 
@@ -64,13 +64,14 @@ def solve_c2(stacks, instructions):
 
     for crate in stacks2.values():
         res = res + crate[0][1]
+
+    assert res == "QZFJRWHGS"
     return res
 
 
 if __name__ == "__main__":
     with open("day-5/input.txt", encoding="utf-8") as input_file:
         data = input_file.read()
-    STACKS, INSTRUCTIONS = reformat(data)
-    print(f"Solution to challenge 1 is: {solve_c1(STACKS, INSTRUCTIONS)}") # ZSQVCCJLL
-    STACKS, INSTRUCTIONS = reformat(data)
-    print(f"Solution to challenge 2 is: {solve_c2(STACKS, INSTRUCTIONS)}") # QZFJRWHGS
+    stacks, instructions = reformat(data)
+    print(f"Solution to challenge 1 is: {solve_c1(stacks.copy(), instructions.copy())}") # ZSQVCCJLL
+    print(f"Solution to challenge 2 is: {solve_c2(stacks.copy(), instructions.copy())}") # QZFJRWHGS
