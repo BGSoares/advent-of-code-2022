@@ -80,5 +80,5 @@ if __name__ == "__main__":
     with open("day-5/input.txt", encoding="utf-8") as input_file:
         data = input_file.read()
     stacks, instructions = reformat(data)
-    print(f"Solution to challenge 1 is: {solve_c1(copy.deepcopy(stacks), instructions.copy())}") # ZSQVCCJLL
-    print(f"Solution to challenge 2 is: {solve_c2(copy.deepcopy(stacks), instructions.copy())}") # QZFJRWHGS
+    print(f"Solution to challenge 1 is: {solve_c1(copy.deepcopy(stacks), instructions.copy())}")
+    print(f"Solution to challenge 2 is: {solve_c2(copy.deepcopy(stacks), instructions.copy())}")
