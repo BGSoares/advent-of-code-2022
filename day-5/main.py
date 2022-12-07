@@ -48,8 +48,8 @@ def solve_c2(stacks, instructions):
     Solve challenge 2.
     See https://adventofcode.com/2022/day/5
     """
-    stacks1 = stacks.copy()
-    assert type(stacks1) == dict
+    stacks2 = stacks.copy()
+    assert type(stacks2) == dict
     res = ""
 
     for instruction in instructions:
@@ -57,12 +57,12 @@ def solve_c2(stacks, instructions):
         from_stack = int(instruction[1])
         to_stack = int(instruction[2])
 
-        move = stacks1[from_stack][:num_crates]
-        stacks1[from_stack] = stacks1[from_stack][num_crates:]
-        stacks1[to_stack] = move + stacks1[to_stack]
+        move = stacks2[from_stack][:num_crates]
+        stacks2[from_stack] = stacks2[from_stack][num_crates:]
+        stacks2[to_stack] = move + stacks2[to_stack]
 
 
-    for crate in stacks1.values():
+    for crate in stacks2.values():
         res = res + crate[0][1]
     return res
 
@@ -71,6 +71,6 @@ if __name__ == "__main__":
     with open("day-5/input.txt", encoding="utf-8") as input_file:
         data = input_file.read()
     STACKS, INSTRUCTIONS = reformat(data)
-    print(f"Solution to challenge 1 is: {solve_c1(STACKS, INSTRUCTIONS)}")
+    print(f"Solution to challenge 1 is: {solve_c1(STACKS, INSTRUCTIONS)}") # ZSQVCCJLL
     STACKS, INSTRUCTIONS = reformat(data)
-    print(f"Solution to challenge 2 is: {solve_c2(STACKS, INSTRUCTIONS)}")
+    print(f"Solution to challenge 2 is: {solve_c2(STACKS, INSTRUCTIONS)}") # QZFJRWHGS
