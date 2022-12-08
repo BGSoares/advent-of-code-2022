@@ -1,48 +1,78 @@
-
+"""
+This module solves the two challenges from Advent of Code 2022, day 8.
+For challenge explanations, see https://adventofcode.com/2022/day/8
+"""
 import numpy as np
 
-def parse(data):
-    data = data.strip().split("\n")
-    data = [[int(tree) for tree in line] for line in data]
-    data = np.array(data, dtype=object)
-    return data
+def parse(input_data):
+    """
+    Parse input input_data.
+    """
+    wip_data = input_data.strip().split("\n")
+    wip_data = [[int(tree) for tree in line] for line in wip_data]
+    res_data = np.array(wip_data, dtype=object)
+    return res_data
 
 
-def solve_c1(data):
-    res = 4 * (len(data)-1)
+def solve_c1(forest):
+    """
+    Solve challenges 2.
+    See https://adventofcode.com/2022/day/8
+    """
+    res = 4 * (len(forest)-1)
     start = 1
-    end = len(data) - 1
-    for r in range(start, end):
-        for c in range(start, end):
-            left = max(data[r,:c])
-            right = max(data[r,c+1:])
-            top = max(data[:r,c])
-            bottom = max(data[r+1:,c])
-            tree = data[r,c]
+    end = len(forest) - 1
+    for row in range(start, end):
+        for column in range(start, end):
+            left = max(forest[row,:column])
+            right = max(forest[row,column+1:])
+            top = max(forest[:row,column])
+            bottom = max(forest[row+1:,column])
+            tree = forest[row,column]
             if (tree > left) | (tree > right) | (tree > top) | (tree > bottom):
                 res += 1
     return res
 
 
-def solve_c2(data):
+def solve_c2(forest):
+    """
+    Solve challenges 2.
+    See https://adventofcode.com/2022/day/8
+    """
     res = 0
     start = 1
-    end = len(data) - 1
+    end = len(forest) - 1
     for row in range(start, end):
         for column in range(start, end):
-            tree = data[row,column]
+            tree = forest[row,column]
 
-            left_trees = np.flip(data[row,:column])
-            left = np.argmax(left_trees >= tree) + 1
+            left_trees = np.flip(forest[row,:column])
+            left_tallest = max(left_trees)
+            if tree > left_tallest:
+                left = len(left_trees)
+            else:
+                left = np.argmax(left_trees >= tree) + 1
 
-            right_trees = data[row,column+1:]
-            right = np.argmax(right_trees >= tree) + 1
+            right_trees = forest[row,column+1:]
+            right_tallest = max(right_trees)
+            if tree > right_tallest:
+                right = len(right_trees)
+            else:
+                right = np.argmax(right_trees >= tree) + 1
 
-            top_trees = np.flip(data[:row,column])
-            top = np.argmax(top_trees >= tree) + 1
+            top_trees = np.flip(forest[:row,column])
+            top_tallest = max(top_trees)
+            if tree > top_tallest:
+                top = len(top_trees)
+            else:
+                top = np.argmax(top_trees >= tree) + 1
 
-            bottom_trees = data[row+1:,column]
-            bottom = np.argmax(bottom_trees >= tree) + 1
+            bottom_trees = forest[row+1:,column]
+            bottom_tallest = max(bottom_trees)
+            if tree > bottom_tallest:
+                bottom = len(bottom_trees)
+            else:
+                bottom = np.argmax(bottom_trees >= tree) + 1
 
             score = left * right * top * bottom
 
